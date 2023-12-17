@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
-import connectToDB from "../../../database";
+import connectToDB from "../../database"
 import { NextResponse } from "next/server";
-import Categorie from "../../../models/catgorie";
+import Categorie from "../../models/catgorie"
 
 
 export async function POST(req){
 
 
     try {
+      await connectToDB();
         const {art,prix,mainImg,imgs,stock,sizeStock,pointStock,cat} = await req.json();
 
         const result = await Categorie.findOne({title: cat,});

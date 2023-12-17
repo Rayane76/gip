@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import connectToDB from "../../../database";
+import connectToDB from "../../database"
 import { NextResponse } from "next/server";
-import Categorie from "../../../models/catgorie";
+import Categorie from "../../models/catgorie"
 
 
 export async function GET(){

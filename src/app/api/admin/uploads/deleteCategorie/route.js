@@ -1,21 +1,22 @@
 import mongoose from "mongoose";
-import connectToDB from "../../database"
+import connectToDB from "../../../../database";
 import { NextResponse } from "next/server";
-import Categorie from "../../models/catgorie"
+import Categorie from "../../../../models/catgorie"
 
-
-export async function GET(){
-
+export async function POST(req){
     try {
         await connectToDB();
-        const result = await Categorie.find({});
 
-        return NextResponse.json({
-            data: result,
-            success: true,
-            message: "success !",
-          });
+        const {id} = await req.json();
+
+
+        const result = await Categorie.findByIdAndDelete(id);
+
         
+        return NextResponse.json({
+            success: true,
+            message: "Section Added"
+          });
        
       } catch (e) {
         console.log(e);
@@ -25,6 +26,4 @@ export async function GET(){
           message: "Something went wrong!",
         });
       }
-    
-
 }
