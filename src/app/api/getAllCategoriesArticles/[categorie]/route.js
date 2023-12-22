@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
-import connectToDB from "../../database"
+import connectToDB from "../../../database"
 import { NextResponse } from "next/server";
-import Categorie from "../../models/catgorie"
+import Categorie from "../../../models/catgorie"
 
 
-export async function GET(){
+export async function GET(req, {params}){
     try {
+
         await connectToDB();
-        const categorie = req.query;
+        const {categorie} = params;
         const result = await Categorie.findOne({title: categorie});
+
 
         return NextResponse.json({
             data: result.articles,

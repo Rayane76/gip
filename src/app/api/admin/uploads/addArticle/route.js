@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import connectToDB from "../../database"
+import connectToDB from "../../../../database"
 import { NextResponse } from "next/server";
-import Categorie from "../../models/catgorie"
+import Categorie from "../../../../models/catgorie"
 
 
 export async function POST(req){
@@ -9,38 +9,30 @@ export async function POST(req){
 
     try {
       await connectToDB();
-        const {art,prix,mainImg,imgs,stock,sizeStock,pointStock,cat} = await req.json();
+        const {data , cat} = await req.json();
 
-        const result = await Categorie.findOne({title: cat,});
+       const result = await Categorie.findOne({title: cat,});
 
         result.articles.push({
             
-                title: art,
-                price: prix,
-                mainImage: mainImg,
-                stock: stock,
+                title: data.artTitle,
+                price: data.artPrice,
+                mainImage: data.artMainImage,
+                images: data.artImages,
+                stock: {
+                  existing: data.artstock.exists,
+                  num: data.artstock.num
+                },
                 sizeInStock: {
-                s: sizeStock.s,
-                m: sizeStock.m,
-                l: sizeStock.l,
-                xl: sizeStock.xl,
-                xxl: sizeStock.xxl,
+                existing: data.artSizeInStock.exists,
+                num: data.artSizeInStock.num,
               },
               pointureInStock: {
-                point36: pointStock.point36,
-                point37: pointStock.point37,
-                point38: pointStock.point38,
-                point39: pointStock.point39,
-                point40: pointStock.point40,
-                point41: pointStock.point41,
-                point42: pointStock.point42,
-                point43: pointStock.point43,
-                point44: pointStock.point44,
+               existing: data.artPointureInStock.exists,
+               num: data.artPointureInStock.num
               },
              
         });
-
-        result.articles.images.push(imgs);
 
         result.save();
         

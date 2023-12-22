@@ -5,10 +5,13 @@ import "../styles/global.css"
 import { useEffect , useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-export default function Uploads(){
+
+export default function Uploads({data}){
     const [categories,setCategories] = useState(null);
     const [categorieName,setCategorieName] = useState(null);
+    const router = useRouter();
 
     useEffect(()=>{
        getCategories();
@@ -17,7 +20,7 @@ export default function Uploads(){
     const getCategories = async () => {
         const result = await axios.get("/api/getAllCategories");
         setCategories(result.data.data);
-     }
+    }
 
     const handleOnChange = (e) =>{
        setCategorieName(e.target.value);
@@ -50,17 +53,23 @@ export default function Uploads(){
         
     
 
-    return(
+    return (
         <>
             <UserButton afterSignOutUrl="/"/>
+            {categories === null ? 
+             <div className="fl">
+              <h1>Loading ...</h1>
+              </div>
+               
+            :        
            <div className="fl" style={{flexDirection:"column"}}>
            <div>
            <label style={{marginRight:"20px"}}>Enter new categorie :</label>
            <input id="input" type="text" placeholder="enter categorie name" onChange={handleOnChange} className="mb" style={{marginBottom:"20px"}}></input>
            <button onClick={handleSubmit}>Submit</button>
            </div>
-           {categories === null ? "" :
-           categories.map((categorie)=>{
+         
+           {categories.map((categorie)=>{
             return(
                 <>
             <div style={{display:"flex",marginBottom:"15px"}}>
@@ -71,8 +80,8 @@ export default function Uploads(){
             )
            })
            }
-
-            </div>
+           </div>
+            }
         </>
     )
 }

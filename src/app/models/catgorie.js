@@ -4,42 +4,52 @@ const CategorieSchema = mongoose.Schema(
   {
     title: String,
     articles: [
-      { 
-      title: String,
-      price: String,
-      mainImage: String,
-      images: [
-        {
-          type: String,
+      {
+        title: String,
+        price: Number,
+        mainImage: String,
+        images: [
+          {
+            type: String,
+          },
+        ],
+        stock: {
+          existing: Boolean,
+          num: Number,
         },
-      ],
-      stock: Number,
-      sizeInStock: {
-      s: Number,
-      m: Number,
-      l: Number,
-      xl: Number,
-      xxl: Number,
-    },
-    pointureInStock: {
-      point36: Number,
-      point37: Number,
-      point38: Number,
-      point39: Number,
-      point40: Number,
-      point41: Number,
-      point42: Number,
-      point43: Number,
-      point44: Number,
-    },
-   }
-   ],
+        sizeInStock: {
+          existing: Boolean,
+          num: {
+            s: Number,
+            m: Number,
+            l: Number,
+            xl: Number,
+            xxl: Number,
+          },
+        },
+        pointureInStock: {
+          existing: Boolean,
+          num: {
+            point35: Number,
+            point36: Number,
+            point37: Number,
+            point38: Number,
+            point39: Number,
+            point40: Number,
+            point41: Number,
+            point42: Number,
+            point43: Number,
+            point44: Number,
+            point45: Number,
+          },
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
 
 const Categorie =
-  mongoose.models.Categories ||
-  mongoose.model("Categories", CategorieSchema);
+  mongoose.models.Categories || mongoose.model("Categories", CategorieSchema);
 
 export default Categorie;
