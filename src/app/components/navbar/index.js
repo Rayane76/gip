@@ -27,7 +27,7 @@ export default function Navbar() {
         <Nav style={{paddingTop:"8px",paddingBottom:"8px"}}>
           <NavItem className="logo" style={{marginRight:"auto"}}>
             <Nav.Link href="/">
-              <img src="logo.png" style={{width:"80px"}} alt="logo"></img>
+              <img src="/logo.png" style={{width:"80px"}} alt="logo"></img>
             </Nav.Link>
           </NavItem>
           <NavItem style={{marginRight:"80px",display:"flex",alignItems:"center"}}>
@@ -74,7 +74,7 @@ export default function Navbar() {
           </Offcanvas>
           <Nav.Item className="mx-auto">
             <Nav.Link href="/">
-              <img src="logo.png" alt="logo" style={{height:"50px",marginLeft:"15px"}}></img>
+              <img src="/logo.png" alt="logo" style={{height:"50px",marginLeft:"15px"}}></img>
             </Nav.Link>
           </Nav.Item>
           <NavItem style={{ display: "flex", alignItems: "center" }}>
