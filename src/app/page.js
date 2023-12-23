@@ -1,7 +1,13 @@
+import Navbar from "./components/navbar"
+import Landing from "./components/landing"
+import HomeCategories from "./components/homeCategories"
+
 export default function Home() {
   return (
     <>
-      <h1>hello</h1>
+      <Navbar />
+      <Landing />
+      <HomeCategories />
     </>
   )
 }
