@@ -63,21 +63,22 @@ export default function SpecificArticle(){
     </Container>
     <p style={{textAlign:"center",marginTop:"20px"}}>pull</p>
     <p style={{textAlign:"center",marginTop:"10px"}}>100$</p>
-    <p style={{marginLeft:"20px"}}>Color</p>
-    <div className='d-flex justify-content-start'>
-    <button className='button_size_color' style={{marginLeft:"20px"}}>Gray</button>
-    <button className='button_size_color'>Black</button>
-    <button className='button_size_color'>Sky_blue</button>
-    <button className='button_size_color'>Purple</button>
-    </div>
+    {/* <p style={{marginLeft:"20px"}}>Color</p>
+    <Form.Select value={color} onChange={onColorSelect}>
+            <option>Select Color</option>   
+            <option value="black">Black</option>
+            <option value="gray">Gray</option>
+            <option value="purple">Purple</option>
+          </Form.Select> */}
     <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
-    <div className='d-flex justify-content-start'>
-    <button className='button_size_color' style={{marginLeft:"20px"}}>S</button>
-    <button className='button_size_color'>M</button>
-    <button className='button_size_color'>L</button>
-    <button className='button_size_color'>XL</button>
-    <button className='button_size_color'>XXL</button>
-    </div>
+    <Form.Select value={size} onChange={onSizeSelect}>
+       <option>Select Size</option>   
+      <option value="s">S</option>
+      <option value="m">M</option>
+      <option value="l">L</option>
+      <option value="xl">XL</option>
+      <option value="xxl">XXL</option>
+      </Form.Select>
     <div className="d-grid gap-2" style={{marginTop:"20px"}}>
       <Button variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
         Add to Cart
@@ -148,7 +149,7 @@ export default function SpecificArticle(){
         <h1>Pull</h1>
         <h3>100$</h3>
         <form>
-        <p style={{marginLeft:"20px"}}>Color</p>
+        {/* <p style={{marginLeft:"20px"}}>Color</p>
           <div className='d-flex justify-content-start'>
           <Form.Select value={color} onChange={onColorSelect}>
             <option>Select Color</option>   
@@ -156,7 +157,7 @@ export default function SpecificArticle(){
             <option value="gray">Gray</option>
             <option value="purple">Purple</option>
           </Form.Select>
-          </div>
+          </div> */}
           <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
           <div className='d-flex justify-content-start'>
           <Form.Select value={size} onChange={onSizeSelect}>

@@ -9,10 +9,11 @@ export async function POST(req){
 
     try {
       await connectToDB();
-        const {cat} = await req.json();
+        const {cat,image} = await req.json();
 
         const result = await Categorie.insertMany({
             title: cat,
+            image: image,
             articles: [],
         });
         

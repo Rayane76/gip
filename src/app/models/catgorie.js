@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const CategorieSchema = mongoose.Schema(
   {
     title: String,
+    image: String,
     articles: [
       {
         title: String,

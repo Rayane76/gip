@@ -6,11 +6,13 @@ import { useEffect , useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { CldUploadButton } from 'next-cloudinary';
 
 
 export default function Uploads({data}){
     const [categories,setCategories] = useState(null);
     const [categorieName,setCategorieName] = useState(null);
+    const [categorieImage,setCategorieImage] = useState(null);
     const router = useRouter();
 
     useEffect(()=>{
@@ -22,15 +24,22 @@ export default function Uploads({data}){
         setCategories(result.data.data);
     }
 
-    const handleOnChange = (e) =>{
+    const handleOnChangeTitle = (e) =>{
        setCategorieName(e.target.value);
     }
+
+    const handleOnChangeImage = (e) =>{
+      setCategorieImage(e.target.value);
+   }
 
     const handleSubmit = async ()=>{
         const inputField = document.getElementById("input");
         inputField.value = "";
+        const inputField2 = document.getElementById("input2");
+        inputField2.value = "";
         const result = await axios.post("/api/admin/uploads/addCategorie",{
             cat: categorieName,
+            image: categorieImage,
         })
         .then(function (response) {
             console.log(response.data.success);
@@ -65,9 +74,20 @@ export default function Uploads({data}){
            <div className="fl" style={{flexDirection:"column"}}>
            <div>
            <label style={{marginRight:"20px"}}>Enter new categorie :</label>
-           <input id="input" type="text" placeholder="enter categorie name" onChange={handleOnChange} className="mb" style={{marginBottom:"20px"}}></input>
-           <button onClick={handleSubmit}>Submit</button>
+           <input required id="input" type="text" placeholder="enter categorie name" onChange={handleOnChangeTitle} className="mb" style={{marginBottom:"20px"}}></input>
            </div>
+           <div className="inputsMarginBtn" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+      <label className="inputsMarginBtn" style={{marginRight:"15px"}}>Categorie image :</label>
+       <CldUploadButton
+  uploadPreset="zkmldp3q"
+/>
+</div>
+           <div>
+           <label style={{marginRight:"20px"}}>Enter categorie image title :</label>
+           {/* <p>Please enter the exact same image title with the .extension (ex: image.png)</p> */}
+           <input required id="input2" type="text" placeholder="enter categorie image title" onChange={handleOnChangeImage} className="mb" style={{marginBottom:"20px"}}></input>
+           </div>
+           <button style={{marginBottom:"50px"}} onClick={handleSubmit}>Submit</button>
          
            {categories.map((categorie)=>{
             return(

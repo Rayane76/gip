@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { CldUploadButton } from 'next-cloudinary';
 import { CldImage } from 'next-cloudinary';
-import { CldUploadWidget } from 'next-cloudinary';
 
 export default function AddArticle(){
     const params = useParams();
