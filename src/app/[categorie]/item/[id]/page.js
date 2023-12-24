@@ -9,7 +9,6 @@ import axios from "axios";
 
 
 
-
 export default function Art(){
     const params = useParams();
     const categorie = params.categorie;
@@ -36,7 +35,7 @@ export default function Art(){
             <Navbar />
             {article === null ? "" 
             :
-            <SpecificArticle title={article.title} price={article.price} mainImage={article.mainImage} allImages={article.images} />
+            <SpecificArticle title={article.title} price={article.price} mainImage={article.mainImage} allImages={article.images} id={id} />
             }
         </>
     )

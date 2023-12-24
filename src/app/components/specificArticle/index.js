@@ -20,6 +20,8 @@ import 'swiper/css/pagination';
 
 
 import { FreeMode, Navigation, Thumbs, Pagination } from 'swiper/modules';
+import axios from 'axios';
+import { ContentPasteOffSharp } from '@mui/icons-material';
 
 
 export default function SpecificArticle(props){
@@ -38,7 +40,20 @@ export default function SpecificArticle(props){
     setSize(e.target.value);
   }
 
-  const url = "https://res.cloudinary.com/dsyvhttva/image/upload/v1703432812/gip/"
+  const url = "https://res.cloudinary.com/dsyvhttva/image/upload/v1703432812/gip/";
+
+  const addToCart = async () =>{
+    const result = await axios.post("/api/addToCart",{
+      title: props.title,
+      id: props.id,
+  })
+  .then(function (response) {
+      console.log(response.data.success);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
 
   return (
@@ -83,7 +98,7 @@ export default function SpecificArticle(props){
       <option value="xxl">XXL</option>
       </Form.Select>
     <div className="d-grid gap-2" style={{marginTop:"20px"}}>
-      <Button variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
+      <Button onClick={addToCart} variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
         Add to Cart
       </Button>
       <a href='/checkout' style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px"}}>
@@ -168,7 +183,7 @@ export default function SpecificArticle(props){
       </Form.Select>
           </div>
           <div className="d-grid gap-2" style={{marginTop:"20px"}}>
-            <Button variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
+            <Button onClick={addToCart} variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
              Add to Cart
             </Button>
             <a href='/checkout' style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px"}}>
