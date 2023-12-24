@@ -22,7 +22,7 @@ import 'swiper/css/pagination';
 import { FreeMode, Navigation, Thumbs, Pagination } from 'swiper/modules';
 
 
-export default function SpecificArticle(){
+export default function SpecificArticle(props){
 
 
   const [article,setArticle] = useState(null); 
@@ -38,6 +38,8 @@ export default function SpecificArticle(){
     setSize(e.target.value);
   }
 
+  const url = "https://res.cloudinary.com/dsyvhttva/image/upload/v1703432812/gip/"
+
 
   return (
     <>
@@ -49,20 +51,21 @@ export default function SpecificArticle(){
           clickable: true,
            }} 
         modules={[Pagination]} >
-        
+         
+         <SwiperSlide style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
+        <img src={url + props.mainImage} alt='product' style={{width:"400px"}}></img>
+        </SwiperSlide>
+        {props.allImages.map((image)=>{
+          return(
             <SwiperSlide style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-        <img src="/pull1.jpg" alt='product' style={{width:"400px"}}></img>
+        <img src={url + image} alt='product' style={{width:"400px"}}></img>
         </SwiperSlide>
-        <SwiperSlide style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-        <img src="/pull1.jpg" alt='product' style={{width:"400px"}}></img>
-        </SwiperSlide>
-        <SwiperSlide style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-        <img src="/pull1.jpg" alt='product' style={{width:"400px"}}></img>
-        </SwiperSlide>
+          )
+        })}
       </Swiper>
     </Container>
-    <p style={{textAlign:"center",marginTop:"20px"}}>pull</p>
-    <p style={{textAlign:"center",marginTop:"10px"}}>100$</p>
+    <p style={{textAlign:"center",marginTop:"20px"}}>{props.title}</p>
+    <p style={{textAlign:"center",marginTop:"10px"}}>{props.price}</p>
     {/* <p style={{marginLeft:"20px"}}>Color</p>
     <Form.Select value={color} onChange={onColorSelect}>
             <option>Select Color</option>   
@@ -107,19 +110,16 @@ export default function SpecificArticle(){
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-
-            <SwiperSlide>
-          <img src="/pull1.jpg" alt='phot' />
+       <SwiperSlide>
+          <img src={url + props.mainImage} alt='phot' />
         </SwiperSlide>
-        <SwiperSlide>
-          <img src="/pull1.jpg" alt='phot' />
+      {props.allImages.map((image)=>{
+        return(
+          <SwiperSlide>
+          <img src={url + image} alt='phot' />
         </SwiperSlide>
-        <SwiperSlide>
-          <img src="/pull1.jpg" alt='phot' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/pull1.jpg" alt='phot' />
-        </SwiperSlide>
+        )
+      })}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
@@ -131,23 +131,21 @@ export default function SpecificArticle(){
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-            <SwiperSlide>
-          <img src="/pull1.jpg" alt='phot' />
+       <SwiperSlide>
+          <img src={url + props.mainImage} alt='phot' />
         </SwiperSlide>
-        <SwiperSlide>
-          <img src="/pull1.jpg" alt='phot' />
+      {props.allImages.map((image)=>{
+        return(
+          <SwiperSlide>
+          <img src={url + image} alt='phot' />
         </SwiperSlide>
-        <SwiperSlide>
-          <img src="/pull1.jpg" alt='phot' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/pull1.jpg" alt='phot' />
-        </SwiperSlide>
+        )
+      })}
       </Swiper>
       </Container>
       <Container>
-        <h1>Pull</h1>
-        <h3>100$</h3>
+        <h1>{props.title}</h1>
+        <h3>{props.price}</h3>
         <form>
         {/* <p style={{marginLeft:"20px"}}>Color</p>
           <div className='d-flex justify-content-start'>
