@@ -5,6 +5,7 @@ import Landing from "./components/landing"
 import HomeCategories from "./components/homeCategories"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Footer from "./components/Footer"
 
 export default function Home() {
 
@@ -28,6 +29,7 @@ export default function Home() {
       <Navbar />
       <Landing />
       <HomeCategories categories={categories}/>
+      <Footer />
       </>
       }
     </>

@@ -65,9 +65,6 @@ export default function Navbar() {
               </div>
           </NavItem>
           <NavItem style={{marginRight:"80px",display:"flex",alignItems:"center"}}>
-            CONTACTS
-          </NavItem>
-          <NavItem style={{marginRight:"80px",display:"flex",alignItems:"center"}}>
           <Nav.Link href="/cart" style={{color:"black"}}>CART</Nav.Link>
           </NavItem>
         </Nav>

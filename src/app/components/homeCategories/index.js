@@ -45,7 +45,7 @@ export default function HomeCategories(props){
       })
       }
       </Swiper>
-      </div>    
+      </div> 
         </>
     )
 }

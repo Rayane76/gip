@@ -39,9 +39,9 @@ export default function Landing(){
                <h1 style={{marginBottom:"0",rotate:"2deg",fontWeight:"900",fontSize:"30px"}}>NATURAL</h1>
                </div>
                <h1 style={{fontWeight:"900",marginLeft:"8px",fontSize:"30px"}}>TWIST</h1>
-               <p style={{marginLeft:"8px",marginTop:"20px",marginBottom:"20px"}}>Find your classic style<br></br> now !</p>
+               <p style={{marginLeft:"8px",marginTop:"20px",marginBottom:"20px",fontWeight:"lighter"}}>Find your classic style<br></br> now !</p>
                <div style={{display:"flex",justifyContent:"center"}}>
-               <button>Shop now</button>
+               <Button variant="dark" size='lg'>Shop now</Button>
                </div>
                </div>
                <div style={{marginTop:"50px"}}>

@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Footer from "../Footer";
 
 export default function Cart(){
     
@@ -29,7 +30,62 @@ export default function Cart(){
 
     return (
         <>
-         <Navbar />
+        {articles === null ? "" :
+        articles.length === 0 ? 
+        <>
+          <Navbar />
+          <div style={{display:"flex",justifyContent:"center",marginTop:"150px",height:"50vh"}}>
+             <h1>Cart is empty</h1>
+          </div>
+          <Footer />
+        </>
+         :
+           <>
+           <Navbar />
+         <div className='main' style={{marginTop:"40px",height:"50vh"}}>
+         <div className='tab'>
+         <Table>
+          <thead>
+            <tr>
+              <th>Produit</th>
+              <th>Prix</th>
+              <th>Sous-total</th>
+            </tr>
+          </thead>
+          <tbody>
+          {articles === null || articles.length === 0 ? "" :
+          articles.map((item)=>{
+            return(
+            <CartItem image={item.mainImage} title={item.title} price={item.price}/>
+            )
+          })
+          }
+          </tbody>
+        </Table>
+        </div>
+        <div>
+        <Card className='commande'>
+          <Card.Body>
+            <Card.Title>Total Panier</Card.Title>
+            <hr></hr>
+            <div style={{display:"flex"}}>
+            <p style={{marginRight:"auto"}}>Sous Total</p>
+            <p>{price}</p>
+            </div>
+            <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+            <a href='/checkout'>
+            <Button variant="primary">Commander</Button>
+            </a>
+            </div>
+            
+          </Card.Body>
+        </Card>
+        </div>
+         </div>  
+         <Footer />
+           </>
+        }
+         {/* <Navbar />
          <div className='main' style={{marginTop:"40px"}}>
          <div className='tab'>
          <Table>
@@ -69,7 +125,7 @@ export default function Cart(){
           </Card.Body>
         </Card>
         </div>
-         </div>   
+         </div>    */}
         </>
       )
 }
