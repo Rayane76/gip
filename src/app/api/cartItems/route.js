@@ -33,8 +33,6 @@ export async function GET(req){
                 }
             })
 
-            if(result.length != 0){
-
             let specific = result[0].articles.find(x => x._id.toString() === array[i]);
             for (let j = 0; j < sizes.length; j++){
              if (sizes[j].id === specific._id.toString()){
@@ -50,7 +48,6 @@ export async function GET(req){
             }
             price = price + specific.price;
         }
-    }
         
         return NextResponse.json({
             data: data,

@@ -8,9 +8,6 @@ export async function POST(req){
     try {
         await connectToDB();
         const {name} = await req.json();
-        console.log(name);
-
-
         cookies().delete(name);
         return NextResponse.json({
             success: true,
