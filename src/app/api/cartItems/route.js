@@ -20,15 +20,7 @@ export async function GET(req){
                sizes.push({size:cookie.value,id: cookie.name})
             }
             if (cookie.value.length === 24){
-            //   if(cookie.value ===  '658852484ae65c0fc3a81ad7'){
-            //     cookies().delete(cookie.name)
-            //   } 
-            //   else if(cookie.value ===  '658852b54ae65c0fc3a81ae3'){
-            //     cookies().delete(cookie.name)
-            //   } 
-            //   else{
               array.push(cookie.value)
-            //  }
             }
           }
           )

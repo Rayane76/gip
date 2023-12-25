@@ -9,8 +9,8 @@ export async function POST(req){
 
         const oneDay = 24 * 60 * 60 * 1000
       
-        cookies().set(title,id ,{ expires: Date.now() + oneDay });
-        cookies().set(id,size,  { expires: Date.now() + oneDay });
+        cookies().set(title,id , {secure:true} ,{ expires: Date.now() + oneDay });
+        cookies().set(id,size,{secure:true} , { expires: Date.now() + oneDay });
         return NextResponse.json({
             success: true,
             message: "Logged in successfully"
