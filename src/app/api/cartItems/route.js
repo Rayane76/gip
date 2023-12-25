@@ -32,9 +32,6 @@ export async function GET(req){
             }
           }
           )
-
-          console.log(array);
-        
         for (let i = 0; i < array.length; i++) {
             let result = await Categorie.find({
                 articles: {
