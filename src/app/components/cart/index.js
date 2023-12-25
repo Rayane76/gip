@@ -32,6 +32,7 @@ export default function Cart(){
     return (
         <>
         {articles === null ? "" :
+        articles === undefined ? "" :
         articles.length === 0 ? 
         <>
           <Navbar />
@@ -87,47 +88,6 @@ export default function Cart(){
          <Footer />
            </>
         }
-         {/* <Navbar />
-         <div className='main' style={{marginTop:"40px"}}>
-         <div className='tab'>
-         <Table>
-          <thead>
-            <tr>
-              <th>Produit</th>
-              <th>Prix</th>
-              <th>Sous-total</th>
-            </tr>
-          </thead>
-          <tbody>
-          {articles === null || articles.length === 0 ? "" :
-          articles.map((item)=>{
-            return(
-            <CartItem image={item.mainImage} title={item.title} price={item.price}/>
-            )
-          })
-          }
-          </tbody>
-        </Table>
-        </div>
-        <div>
-        <Card className='commande'>
-          <Card.Body>
-            <Card.Title>Total Panier</Card.Title>
-            <hr></hr>
-            <div style={{display:"flex"}}>
-            <p style={{marginRight:"auto"}}>Sous Total</p>
-            <p>{price}</p>
-            </div>
-            <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-            <a href='/checkout'>
-            <Button variant="primary">Commander</Button>
-            </a>
-            </div>
-            
-          </Card.Body>
-        </Card>
-        </div>
-         </div>    */}
         </>
       )
 }
