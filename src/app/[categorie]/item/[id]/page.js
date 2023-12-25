@@ -31,11 +31,13 @@ export default function Art(){
     },[])
 
     return(
-        <>
-            <Navbar />
-            {article === null ? "" 
+        <>   
+            {article === null ? ""
             :
+            <> 
+            <Navbar />
             <SpecificArticle title={article.title} price={article.price} mainImage={article.mainImage} allImages={article.images} id={id} />
+            </>
             }
         </>
     )

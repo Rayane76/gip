@@ -33,13 +33,13 @@ export default function CatArticles(){
 
    return(
     <>
+        {articles === null ? "" :
+        <>
         <Navbar />
         <div className="d-none d-md-block" style={{marginTop:"40px",height:"auto"}}>
         <Container>
           <Row>
-
-          {articles === null ? "" :
-          articles.map((article)=>{
+          {articles.map((article)=>{
             return(
               <Col>
               <Article image={article.mainImage} title={article.title} price={article.price} id={article._id} />
@@ -51,14 +51,15 @@ export default function CatArticles(){
         </Container>
         </div>
         <div className="d-md-none" style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column",marginTop:"30px"}}>
-        {articles === null ? "" : 
-        articles.map((article)=>{
+        {articles.map((article)=>{
           return(
             <Article image={article.mainImage} title={article.title} price={article.price} id={article._id} />
           )
         })
         }
         </div>
+        </>
+        }
     </>
    )
 }

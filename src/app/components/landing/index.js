@@ -1,5 +1,5 @@
 import {Merriweather_Sans} from 'next/font/google';
-
+import Button from 'react-bootstrap/Button';
 const meri = Merriweather_Sans({subsets: ['latin']});
 
 
@@ -17,9 +17,9 @@ export default function Landing(){
                <h1 style={{marginBottom:"0",rotate:"2deg",fontWeight:"900",fontSize:"45px",letterSpacing:"2px"}}>NATURAL</h1>
                </div>
                <h1 style={{fontWeight:"900",marginLeft:"8px",fontSize:"45px",letterSpacing:"2px"}}>TWIST</h1>
-               <p style={{marginLeft:"8px",marginTop:"20px",marginBottom:"20px"}}>Find your classic style now !</p>
+               <p style={{marginLeft:"8px",marginTop:"30px",marginBottom:"30px",fontWeight:"lighter"}}>Find your classic style now !</p>
                <div style={{display:"flex",justifyContent:"center"}}>
-               <button>Shop now</button>
+               <Button variant="dark" size='lg'>Shop now</Button>
                </div>
                </div>
                <div style={{marginRight:"200px",marginTop:"0px"}}>

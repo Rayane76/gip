@@ -6,24 +6,15 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import {Navigation } from 'swiper/modules';
 import axios from "axios";
+import {Merriweather_Sans} from 'next/font/google';
+const meri = Merriweather_Sans({subsets: ['latin']});
 
 
-export default function HomeCategories(){
 
-   const [categories,setCategories] = useState(null);
-
-   const getCategories = async () =>{
-    const result = await axios.get("/api/getAllCategories");
-    setCategories(result.data.data);
-   }
-
-   useEffect(()=>{
-    getCategories();
-   },[]);
-
+export default function HomeCategories(props){
     return(
         <>
-        <h5 style={{marginTop:"50px",marginBottom:"50px"}}>Categories</h5>   
+        <h5 className={meri.className} style={{marginTop:"100px",marginBottom:"50px",marginLeft:"30px",fontWeight:"bolder"}}>CATEGORIES</h5>   
      <div>
     <Swiper
         slidesPerView={1}
@@ -33,7 +24,7 @@ export default function HomeCategories(){
         breakpoints={{
           640: {
             slidesPerView: 1,
-            spaceBetween: 30,
+            spaceBetween: 0,
           },
           768: {
             slidesPerView: 2,
@@ -46,19 +37,13 @@ export default function HomeCategories(){
         }}
         className="mySwiper"
       >
-      {categories === null ? "" : 
-      categories.map((categorie)=>{
+      {props.categories === null ? "" : 
+      props.categories.map((categorie)=>{
         return(
-          <SwiperSlide><Categorie kind={categorie.title}  image={categorie.image}/></SwiperSlide>
+          <SwiperSlide style={{width:"fit-content"}}><Categorie kind={categorie.title}  image={categorie.image}/></SwiperSlide>
         )
       })
       }
-       {/* <SwiperSlide><Categorie kind="LIVING"  image="landing1.png"/></SwiperSlide>
-        <SwiperSlide><Categorie kind="DINING"  image="landing1.png"/></SwiperSlide>
-        <SwiperSlide><Categorie kind="BEDROOM"  image="landing1.png"/></SwiperSlide>
-        <SwiperSlide><Categorie kind="OFFICE"  image="landing1.png"/></SwiperSlide>
-        <SwiperSlide><Categorie kind="DECOR"  image="landing1.png"/></SwiperSlide>
-        <SwiperSlide><Categorie kind="LIGHTING"  image="landing1.png"/></SwiperSlide> */}
       </Swiper>
       </div>    
         </>
