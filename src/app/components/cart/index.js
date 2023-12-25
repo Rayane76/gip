@@ -23,7 +23,7 @@ export default function Cart(){
 
     useEffect(()=>{
       getArticles();
-    },[])
+    },[articles])
 
 
 
@@ -56,7 +56,7 @@ export default function Cart(){
           {articles === null || articles.length === 0 ? "" :
           articles.map((item)=>{
             return(
-            <CartItem image={item.mainImage} title={item.title} price={item.price}/>
+            <CartItem image={item.mainImage} title={item.title} price={item.price} id={item._id} />
             )
           })
           }

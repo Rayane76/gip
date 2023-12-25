@@ -5,15 +5,11 @@ import { NextResponse } from 'next/server';
 export async function POST(req){
 
     try {
-        const { title, id } = await req.json();
-
-        console.log(title);
-        console.log(id);
-
-        const oneDay = 24 * 60 * 60 * 1000
+        const {name} = await req.json();
+        console.log(name);
 
 
-        cookies().set(title,id,{ expires: Date.now() + oneDay });
+        cookies().delete(name);
         return NextResponse.json({
             success: true,
             message: "Logged in successfully"

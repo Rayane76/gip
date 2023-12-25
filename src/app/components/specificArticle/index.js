@@ -29,6 +29,8 @@ export default function SpecificArticle(props){
 
   const [article,setArticle] = useState(null); 
 
+  const [message,setMessage] = useState(null);
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const [color,setColor] = useState("");
@@ -43,6 +45,7 @@ export default function SpecificArticle(props){
   const url = "https://res.cloudinary.com/dsyvhttva/image/upload/v1703432812/gip/";
 
   const addToCart = async () =>{
+    setMessage("Successfully added to cart !")
     const result = await axios.post("/api/addToCart",{
       title: props.title,
       id: props.id,
@@ -106,6 +109,9 @@ export default function SpecificArticle(props){
         Buy Now
       </Button>
       </a>
+    </div>
+    <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"15px"}}>
+    <p>{message}</p>
     </div>
     </div>
 
@@ -193,6 +199,7 @@ export default function SpecificArticle(props){
             </a>
           </div>
         </form>
+        <p style={{marginTop:"30px"}}>{message}</p>
       </Container>
       </Container>
     </div>
