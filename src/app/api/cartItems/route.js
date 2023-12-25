@@ -20,11 +20,21 @@ export async function GET(req){
                sizes.push({size:cookie.value,id: cookie.name})
             }
             if (cookie.value.length === 24){
+              if(cookie.value ===  '658852484ae65c0fc3a81ad7'){
+                cookies().delete(cookie.name)
+              } 
+              else if(cookie.value ===  '658852b54ae65c0fc3a81ae3'){
+                cookies().delete(cookie.name)
+              } 
+              else{
               array.push(cookie.value)
+              }
             }
           }
           )
 
+          console.log(array);
+        
         for (let i = 0; i < array.length; i++) {
             let result = await Categorie.find({
                 articles: {
@@ -49,7 +59,6 @@ export async function GET(req){
             }
             price = price + specific.price;
         }
-
         
         return NextResponse.json({
             data: data,
