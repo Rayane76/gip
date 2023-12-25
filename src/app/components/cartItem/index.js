@@ -30,6 +30,7 @@ export default function CartItem(props){
               </div>
             </td>
             <td style={{verticalAlign:"middle"}}>{props.price}</td>
+            <td style={{verticalAlign:"middle"}}>{props.size}</td>
             <td style={{verticalAlign:"middle"}}>{props.price}</td>
           </tr>
       </>

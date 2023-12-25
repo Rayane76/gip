@@ -14,11 +14,13 @@ export default function Cart(){
     
     const [articles,setArticles] = useState(null);
     const [price,setPrice] = useState(0);
+    const [sizes,setSizes] = useState(null);
 
     const getArticles = async () =>{
         const result = await axios.get("/api/cartItems");
         setArticles(result.data.data);
         setPrice(result.data.price);
+        console.log(result.data.data);
     }
 
     useEffect(()=>{
@@ -47,16 +49,17 @@ export default function Cart(){
          <Table>
           <thead>
             <tr>
-              <th>Produit</th>
-              <th>Prix</th>
-              <th>Sous-total</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Size</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
           {articles === null || articles.length === 0 ? "" :
           articles.map((item)=>{
             return(
-            <CartItem image={item.mainImage} title={item.title} price={item.price} id={item._id} />
+            <CartItem size={item.size} image={item.article.mainImage} title={item.article.title} price={item.article.price} id={item.article._id} />
             )
           })
           }

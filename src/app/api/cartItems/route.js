@@ -8,10 +8,15 @@ export async function GET(req){
     try {
 
         const cookieStore = cookies()
+        let sizes = [];
         let array = []
         let data = [];
+        let found = 0;
         let price = 0;
         cookieStore.getAll().map((cookie) => {
+            if(cookie.name.length === 24){
+               sizes.push({size:cookie.value,id: cookie.name})
+            }
             if (cookie.value.length === 24){
               array.push(cookie.value)
             }
@@ -27,7 +32,18 @@ export async function GET(req){
                 }
             })
             let specific = result[0].articles.find(x => x._id.toString() === array[i]);
-            data.push(specific);
+            for (let j = 0; j < sizes.length; j++){
+             if (sizes[j].id === specific._id.toString()){
+                data.push({article: specific,size:sizes[j].size})
+                found = found + 1;
+             }
+            }
+            if(found === 0){
+            data.push({article: specific , size: null});
+            }
+            else{
+                found = 0;
+            }
             price = price + specific.price;
         }
 

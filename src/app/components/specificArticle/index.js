@@ -47,8 +47,9 @@ export default function SpecificArticle(props){
   const addToCart = async () =>{
     setMessage("Successfully added to cart !")
     const result = await axios.post("/api/addToCart",{
-      title: props.title,
-      id: props.id,
+      title: props.article.title,
+      id: props.article._id,
+      size: size,
   })
   .then(function (response) {
       console.log(response.data.success);
@@ -71,9 +72,9 @@ export default function SpecificArticle(props){
         modules={[Pagination]} >
          
          <SwiperSlide style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-        <img src={url + props.mainImage} alt='product' style={{width:"400px"}}></img>
+        <img src={url + props.article.mainImage} alt='product' style={{width:"400px"}}></img>
         </SwiperSlide>
-        {props.allImages.map((image)=>{
+        {props.article.images.map((image)=>{
           return(
             <SwiperSlide style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
         <img src={url + image} alt='product' style={{width:"400px"}}></img>
@@ -84,22 +85,39 @@ export default function SpecificArticle(props){
     </Container>
     <p style={{textAlign:"center",marginTop:"20px"}}>{props.title}</p>
     <p style={{textAlign:"center",marginTop:"10px"}}>{props.price}</p>
-    {/* <p style={{marginLeft:"20px"}}>Color</p>
-    <Form.Select value={color} onChange={onColorSelect}>
-            <option>Select Color</option>   
-            <option value="black">Black</option>
-            <option value="gray">Gray</option>
-            <option value="purple">Purple</option>
-          </Form.Select> */}
     <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
-    <Form.Select value={size} onChange={onSizeSelect}>
+    {props.article.sizeInStock.existing === false ? ""
+    :
+    <>
+      <Form.Select value={size} onChange={onSizeSelect}>
        <option>Select Size</option>   
-      <option value="s">S</option>
-      <option value="m">M</option>
-      <option value="l">L</option>
-      <option value="xl">XL</option>
-      <option value="xxl">XXL</option>
+       {props.article.sizeInStock.num.s > 0 && <option value="s">S</option>}
+       {props.article.sizeInStock.num.m > 0 && <option value="m">M</option>}
+       {props.article.sizeInStock.num.l > 0 && <option value="l">L</option>}
+       {props.article.sizeInStock.num.xl > 0 && <option value="xl">XL</option>}
+       {props.article.sizeInStock.num.xxl > 0 && <option value="xxl">XXL</option>}
       </Form.Select>
+    </>
+    }
+    {props.article.pointureInStock.existing === false ? ""
+    :
+    <>
+      <Form.Select value={size} onChange={onSizeSelect}>
+       <option>Select Size</option>   
+       {props.article.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
+       {props.article.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
+       {props.article.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
+       {props.article.pointureInStock.num.point38 > 0 && <option value="38">38</option>}
+       {props.article.pointureInStock.num.point39 > 0 && <option value="39">39</option>}
+       {props.article.pointureInStock.num.point40 > 0 && <option value="40">40</option>}
+       {props.article.pointureInStock.num.point41 > 0 && <option value="41">41</option>}
+       {props.article.pointureInStock.num.point42 > 0 && <option value="42">42</option>}
+       {props.article.pointureInStock.num.point43 > 0 && <option value="43">43</option>}
+       {props.article.pointureInStock.num.point44 > 0 && <option value="44">44</option>}
+       {props.article.pointureInStock.num.point45 > 0 && <option value="45">45</option>}
+      </Form.Select>
+    </>
+    }
     <div className="d-grid gap-2" style={{marginTop:"20px"}}>
       <Button onClick={addToCart} variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
         Add to Cart
@@ -132,9 +150,9 @@ export default function SpecificArticle(props){
         className="mySwiper2"
       >
        <SwiperSlide>
-          <img src={url + props.mainImage} alt='phot' />
+          <img src={url + props.article.mainImage} alt='phot' />
         </SwiperSlide>
-      {props.allImages.map((image)=>{
+      {props.article.images.map((image)=>{
         return(
           <SwiperSlide>
           <img src={url + image} alt='phot' />
@@ -153,9 +171,9 @@ export default function SpecificArticle(props){
         className="mySwiper"
       >
        <SwiperSlide>
-          <img src={url + props.mainImage} alt='phot' />
+          <img src={url + props.article.mainImage} alt='phot' />
         </SwiperSlide>
-      {props.allImages.map((image)=>{
+      {props.article.images.map((image)=>{
         return(
           <SwiperSlide>
           <img src={url + image} alt='phot' />
@@ -165,28 +183,44 @@ export default function SpecificArticle(props){
       </Swiper>
       </Container>
       <Container>
-        <h1>{props.title}</h1>
-        <h3>{props.price}</h3>
+        <h1>{props.article.title}</h1>
+        <h3>{props.article.price}</h3>
         <form>
-        {/* <p style={{marginLeft:"20px"}}>Color</p>
-          <div className='d-flex justify-content-start'>
-          <Form.Select value={color} onChange={onColorSelect}>
-            <option>Select Color</option>   
-            <option value="black">Black</option>
-            <option value="gray">Gray</option>
-            <option value="purple">Purple</option>
-          </Form.Select>
-          </div> */}
           <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
           <div className='d-flex justify-content-start'>
-          <Form.Select value={size} onChange={onSizeSelect}>
+      {props.article.sizeInStock.existing === false ? ""
+    :
+    <>
+      <Form.Select value={size} onChange={onSizeSelect}>
        <option>Select Size</option>   
-      <option value="s">S</option>
-      <option value="m">M</option>
-      <option value="l">L</option>
-      <option value="xl">XL</option>
-      <option value="xxl">XXL</option>
+       {props.article.sizeInStock.num.s > 0 && <option value="s">S</option>}
+       {props.article.sizeInStock.num.m > 0 && <option value="m">M</option>}
+       {props.article.sizeInStock.num.l > 0 && <option value="l">L</option>}
+       {props.article.sizeInStock.num.xl > 0 && <option value="xl">XL</option>}
+       {props.article.sizeInStock.num.xxl > 0 && <option value="xxl">XXL</option>}
       </Form.Select>
+    </>
+    }
+
+    {props.article.pointureInStock.existing === false ? ""
+    :
+    <>
+      <Form.Select value={size} onChange={onSizeSelect}>
+       <option>Select Size</option>   
+       {props.article.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
+       {props.article.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
+       {props.article.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
+       {props.article.pointureInStock.num.point38 > 0 && <option value="38">38</option>}
+       {props.article.pointureInStock.num.point39 > 0 && <option value="39">39</option>}
+       {props.article.pointureInStock.num.point40 > 0 && <option value="40">40</option>}
+       {props.article.pointureInStock.num.point41 > 0 && <option value="41">41</option>}
+       {props.article.pointureInStock.num.point42 > 0 && <option value="42">42</option>}
+       {props.article.pointureInStock.num.point43 > 0 && <option value="43">43</option>}
+       {props.article.pointureInStock.num.point44 > 0 && <option value="44">44</option>}
+       {props.article.pointureInStock.num.point45 > 0 && <option value="45">45</option>}
+      </Form.Select>
+    </>
+    }
           </div>
           <div className="d-grid gap-2" style={{marginTop:"20px"}}>
             <Button onClick={addToCart} variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>

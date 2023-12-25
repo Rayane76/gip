@@ -36,7 +36,7 @@ export default function Art(){
             :
             <> 
             <Navbar />
-            <SpecificArticle title={article.title} price={article.price} mainImage={article.mainImage} allImages={article.images} id={id} />
+            <SpecificArticle article={article}/>
             </>
             }
         </>
