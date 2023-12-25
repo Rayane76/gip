@@ -7,9 +7,6 @@ export async function POST(req){
     try {
         const { title, id, size } = await req.json();
 
-        console.log(title);
-        console.log(id);
-
         const oneDay = 24 * 60 * 60 * 1000
       
         cookies().set(title,id ,{ expires: Date.now() + oneDay });
