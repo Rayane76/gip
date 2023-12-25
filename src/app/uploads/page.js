@@ -17,7 +17,7 @@ export default function Uploads({data}){
 
     useEffect(()=>{
        getCategories();
-    },[]);
+    },[categories]);
 
     const getCategories = async () => {
         const result = await axios.get("/api/getAllCategories");
@@ -84,8 +84,8 @@ export default function Uploads({data}){
 </div>
            <div>
            <label style={{marginRight:"20px"}}>Enter categorie image title :</label>
-           {/* <p>Please enter the exact same image title with the .extension (ex: image.png)</p> */}
-           <input required id="input2" type="text" placeholder="enter categorie image title" onChange={handleOnChangeImage} className="mb" style={{marginBottom:"20px"}}></input>
+           <p>Please enter the exact same image title with the .extension (ex: image.png)</p>
+           <input pattern=".+\.(jpg|jpeg|png|gif|bmp|svg)$" required id="input2" type="text" placeholder="enter categorie image title" onChange={handleOnChangeImage} className="mb" style={{marginBottom:"20px"}}></input>
            </div>
            <button style={{marginBottom:"50px"}} onClick={handleSubmit}>Submit</button>
          

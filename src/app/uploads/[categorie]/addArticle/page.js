@@ -25,20 +25,6 @@ export default function AddArticle(){
     const [warning,setWarning] = useState(null);
 
 
-    // useEffect(()=>{
-    //    getArticles();
-    // },[]);
-
-    // const getArticles = async () => {
-    //     const result = await axios.get("/api/getAllCategoriesArticles/" + categorie,
-    //     {
-    //         params: {
-    //             cat: categorie,
-    //         }
-    //     });
-    //     setArticles(result.data.data);
-    // }
-
     const submitImage = ()=>{
         setAllImages((prev)=> [...prev,image]);
         setImage(null);
@@ -172,7 +158,7 @@ else{
      <div className="inputsMarginBtn" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <label className="inputsMarginBtn" style={{marginRight:"15px"}}>Main image title :</label>
       <label className="inputsMarginBtn" style={{marginRight:"15px"}}>You must enter the exact same name of the image <br></br> with the .extension 'ex: image.png'</label>
-     <input required onChange={(e)=>setMainImage(e.target.value)} className="inputsMarginBtn" type="text" placeholder="enter main image title"></input>
+     <input pattern=".+\.(jpg|jpeg|png|gif|bmp|svg)$" required onChange={(e)=>setMainImage(e.target.value)} className="inputsMarginBtn" type="text" placeholder="enter main image title"></input>
      </div>
      <div className="inputsMarginBtn" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <label className="inputsMarginBtn" style={{marginRight:"15px"}}>All images :</label>
@@ -184,7 +170,7 @@ else{
 <div className="inputsMarginBtn" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <label className="inputsMarginBtn" style={{marginRight:"15px"}}>all images titles :</label>
       <label className="inputsMarginBtn" style={{marginRight:"15px"}}>You must enter the exact same name of the image <br></br> with the .extension 'ex: image.png'</label>
-     <input id="imageName" onChange={(e)=>setImage(e.target.value)} className="inputsMarginBtn" type="text" placeholder="enter an image title"></input>
+     <input pattern=".+\.(jpg|jpeg|png|gif|bmp|svg)$" id="imageName" onChange={(e)=>setImage(e.target.value)} className="inputsMarginBtn" type="text" placeholder="enter an image title"></input>
      <button onClick={submitImage} className="inputsMarginBtn" style={{marginLeft:"20px"}}>Submit</button>
      </div>
      {allImages.length === 0 ? "" : 
@@ -240,8 +226,8 @@ else{
      {stockType === "pointure" &&
       <div style={{marginRight:"30px"}}>
       <label className="inputsMarginBtn" style={{marginRight:"15px"}}>Number of items by pointures</label>
-      <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-      <div style={{marginRight:"15px"}}>
+      <div style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+      {/* <div style={{marginRight:"15px"}}> */}
       <div className="inputsMarginBtn" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <label className="inputsMarginBtn" style={{marginRight:"15px"}}>35 :</label>
       <input onChange={(e)=>setStock({...stock,point35:parseFloat(e.target.value)})} className="inputsMarginBtn" type="text" placeholder="enter number of items"></input>
@@ -266,8 +252,8 @@ else{
       <label className="inputsMarginBtn" style={{marginRight:"15px"}}>40 :</label>
       <input onChange={(e)=>setStock({...stock,point40:parseFloat(e.target.value)})}  className="inputsMarginBtn" type="text" placeholder="enter number of items"></input>
       </div>
-      </div>
-      <div style={{marginLeft:"15px"}}>
+      {/* </div> */}
+      {/* <div style={{marginLeft:"15px"}}> */}
       <div className="inputsMarginBtn" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <label className="inputsMarginBtn" style={{marginRight:"15px"}}>41 :</label>
       <input onChange={(e)=>setStock({...stock,point41:parseFloat(e.target.value)})}  className="inputsMarginBtn" type="text" placeholder="enter number of items"></input>
@@ -289,8 +275,7 @@ else{
       <input className="inputsMarginBtn" type="text" placeholder="enter number of items"></input>
       </div>
       </div>
-      </div>
-      </div>
+      </div> 
      }
       </div>
       <button onClick={handleSubmitArticle}>Submit Article</button>

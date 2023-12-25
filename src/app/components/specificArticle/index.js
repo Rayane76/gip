@@ -105,10 +105,11 @@ export default function SpecificArticle(props){
     </Container>
     <p style={{textAlign:"center",marginTop:"20px"}}>{props.title}</p>
     <p style={{textAlign:"center",marginTop:"10px"}}>{props.price}</p>
-    <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
+   
     {props.article.sizeInStock.existing === false ? ""
     :
     <>
+    <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
       <Form.Select value={size} onChange={onSizeSelect}>
        Select Size   
        {props.article.sizeInStock.num.s > 0 && <option value="s">S</option>}
@@ -122,6 +123,7 @@ export default function SpecificArticle(props){
     {props.article.pointureInStock.existing === false ? ""
     :
     <>
+    <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
       <Form.Select value={size} onChange={onSizeSelect}>
        Select Size   
        {props.article.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
