@@ -45,6 +45,26 @@ export default function SpecificArticle(props){
   const url = "https://res.cloudinary.com/dsyvhttva/image/upload/v1703432812/gip/";
 
   const addToCart = async () =>{
+    if(props.article.sizeInStock.existing === true || props.article.pointureInStock.existing === true){
+      if(size === ""){
+        setMessage("Please select a size !")
+      }
+      else{
+        setMessage("Successfully added to cart !")
+        const result = await axios.post("/api/addToCart",{
+          title: props.article.title,
+          id: props.article._id,
+          size: size,
+      })
+      .then(function (response) {
+          console.log(response.data.success);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+    }
+    else{
     setMessage("Successfully added to cart !")
     const result = await axios.post("/api/addToCart",{
       title: props.article.title,
@@ -58,7 +78,7 @@ export default function SpecificArticle(props){
       console.log(error);
     });
   }
-
+  }
 
   return (
     <>
@@ -90,7 +110,7 @@ export default function SpecificArticle(props){
     :
     <>
       <Form.Select value={size} onChange={onSizeSelect}>
-       <option>Select Size</option>   
+       Select Size   
        {props.article.sizeInStock.num.s > 0 && <option value="s">S</option>}
        {props.article.sizeInStock.num.m > 0 && <option value="m">M</option>}
        {props.article.sizeInStock.num.l > 0 && <option value="l">L</option>}
@@ -103,7 +123,7 @@ export default function SpecificArticle(props){
     :
     <>
       <Form.Select value={size} onChange={onSizeSelect}>
-       <option>Select Size</option>   
+       Select Size   
        {props.article.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
        {props.article.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
        {props.article.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
@@ -192,7 +212,7 @@ export default function SpecificArticle(props){
     :
     <>
       <Form.Select value={size} onChange={onSizeSelect}>
-       <option>Select Size</option>   
+       Select Size   
        {props.article.sizeInStock.num.s > 0 && <option value="s">S</option>}
        {props.article.sizeInStock.num.m > 0 && <option value="m">M</option>}
        {props.article.sizeInStock.num.l > 0 && <option value="l">L</option>}
@@ -206,7 +226,7 @@ export default function SpecificArticle(props){
     :
     <>
       <Form.Select value={size} onChange={onSizeSelect}>
-       <option>Select Size</option>   
+       Select Size   
        {props.article.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
        {props.article.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
        {props.article.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
