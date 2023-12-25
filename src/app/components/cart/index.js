@@ -20,7 +20,7 @@ export default function Cart(){
         const result = await axios.get("/api/cartItems");
         setArticles(result.data.data);
         setPrice(result.data.price);
-        console.log(result.data.data);
+        console.log(result);
     }
 
     useEffect(()=>{

@@ -1,10 +1,12 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server';
+import connectToDB from '../../database';
 
 
 export async function POST(req){
 
     try {
+        await connectToDB();
         const {name} = await req.json();
         console.log(name);
 

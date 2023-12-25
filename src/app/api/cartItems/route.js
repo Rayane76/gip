@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
 import { cookies } from 'next/headers'
 import Categorie from "../../models/catgorie"
+import connectToDB from "../../database";
 
 
 export async function GET(req){
 
     try {
 
+        await connectToDB();
         const cookieStore = cookies()
         let sizes = [];
         let array = []
@@ -31,6 +33,7 @@ export async function GET(req){
                     }
                 }
             })
+
             let specific = result[0].articles.find(x => x._id.toString() === array[i]);
             for (let j = 0; j < sizes.length; j++){
              if (sizes[j].id === specific._id.toString()){
@@ -62,7 +65,7 @@ export async function GET(req){
         console.log(error)
         return NextResponse.json({
             success: false,
-            message: "Logged in successfully"
+            message: "something wrong occured"
         });
     }
 }
