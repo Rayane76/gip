@@ -19,8 +19,8 @@ export default function Cart(){
     const getArticles = async () =>{
       try {
         const result = await axios.get("/api/cartItems");
-        setArticles(result.data.data);
-        setPrice(result.data.price);
+        // setArticles(result.data.data);
+        // setPrice(result.data.price);
       } catch (error) {
         console.error("Error fetching articles:", error);
       }
@@ -30,9 +30,9 @@ export default function Cart(){
       getArticles();
     },[]);
 
-    if (articles === null) {
-      return null; // or render a loading indicator
-    }
+    // if (articles === null) {
+    //   return null; // or render a loading indicator
+    // }
 
 
 
