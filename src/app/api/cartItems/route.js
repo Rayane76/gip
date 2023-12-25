@@ -7,14 +7,13 @@ import connectToDB from "../../database";
 export async function GET(req){
 
     try {
-
-        await connectToDB();
-        const cookieStore = cookies()
         let sizes = [];
         let array = []
         let data = [];
         let found = 0;
         let price = 0;
+        await connectToDB();
+        const cookieStore = cookies()
        await Promise.all(cookieStore.getAll().map(async (cookie) => {
             if(cookie.name.length === 24){
                sizes.push({size:cookie.value,id: cookie.name})
