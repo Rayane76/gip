@@ -12,47 +12,66 @@ export async function GET(req){
         let found = 0;
         let price = 0;
         await connectToDB();
+        try{
         const cookieStore = cookies()
-       await Promise.all(
-        cookieStore.getAll().map(async (cookie) => {
-            if(cookie.name.length === 24){
-               sizes.push({size:cookie.value,id: cookie.name})
-            }
-            if (cookie.value.length === 24){
-                let result = await Categorie.find({
-                    articles: {
-                        $elemMatch : {
-                            _id: cookie.value
-                        }
-                    }
-                })
-        
-                if(result.length != 0){
-                    let specific = await result[0].articles.find(x => x._id.toString() === cookie.value);
-                    for (let j = 0; j < sizes.length; j++){
-                        if (sizes[j].id === specific._id.toString()){
-                           data.push({article: specific,size:sizes[j].size})
-                           found = found + 1;
-                        }
-                       }
-                       if(found === 0){
-                       data.push({article: specific , size: null});
-                       }
-                       else{
-                           found = 0;
-                       }
-                       price = price + specific.price;
-                }
-            }
-        })
-       )
-
+        data.push("success");
         return NextResponse.json({
-            data: data,
-            price: price,
+             data: data,
+            // price: price,
             success: true,
-            message: "Logged in successfully"
+            message: "cookies accessed successfully"
         });
+        }
+        catch(e){
+            data.push("failed")
+            return NextResponse.json({
+                 data: data,
+                // price: price,
+                success: false,
+                message: "cookies can't be accessed"
+            });
+        }
+    //    await Promise.all(
+    //     cookieStore.getAll().map(async (cookie) => {
+    //         console.log(cookie);
+    //         if(cookie.name.length === 24){
+    //            sizes.push({size:cookie.value,id: cookie.name})
+    //         }
+    //         if (cookie.value.length === 24){
+    //             let result = await Categorie.find({
+    //                 articles: {
+    //                     $elemMatch : {
+    //                         _id: cookie.value
+    //                     }
+    //                 }
+    //             })
+        
+    //             if(result.length != 0){
+    //                 let specific = await result[0].articles.find(x => x._id.toString() === cookie.value);
+    //                 for (let j = 0; j < sizes.length; j++){
+    //                     if (sizes[j].id === specific._id.toString()){
+    //                        data.push({article: specific,size:sizes[j].size})
+    //                        found = found + 1;
+    //                     }
+    //                    }
+    //                    if(found === 0){
+    //                    data.push({article: specific , size: null});
+    //                    }
+    //                    else{
+    //                        found = 0;
+    //                    }
+    //                    price = price + specific.price;
+    //             }
+    //         }
+    //     })
+    //   )
+
+        // return NextResponse.json({
+        //     data: data,
+        //     price: price,
+        //     success: true,
+        //     message: "Logged in successfully"
+        // });
 
 
 

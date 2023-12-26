@@ -35,7 +35,14 @@ export default function Cart(){
 
     return (
         <>
-        {
+        {articles === null ? "" :
+        articles.map((article)=>{
+          return(
+          <h1>{article}</h1>
+          )
+        })
+        }
+        {/* {
           articles === null ? "" :
         articles.length === 0 ? 
         <>
@@ -91,7 +98,7 @@ export default function Cart(){
          </div>  
          <Footer />
            </>
-        }
+        } */}
         </>
       )
 }
