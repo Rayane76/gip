@@ -14,7 +14,7 @@ export async function GET(req){
         await connectToDB();
         const cookieStore = cookies()
        await Promise.all(
-        cookieStore.getAll().map(async (cookie) => {
+        cookieStore.getAll({url:"https://gip-lemon.vercel.app"},{path:"https://gip-lemon.vercel.app"}).map(async (cookie) => {
             if(cookie.name.length === 24){
                sizes.push({size:cookie.value,id: cookie.name})
             }
