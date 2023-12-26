@@ -8,9 +8,25 @@ export async function POST(req){
         const { title, id, size } = await req.json();
 
         const oneDay = 24 * 60 * 60 * 1000
-      
-        cookies().set(title,id , { expires: Date.now() + oneDay });
-        cookies().set(id,size , { expires: Date.now() + oneDay });
+
+        cookies().set({
+            name: title,
+            value: id,
+            expires: Date.now() + oneDay,
+            httpOnly: false,
+            secure: true,
+            sameSite: "none"
+        });
+        cookies().set({
+            name: id,
+            value: size,
+            expires: Date.now() + oneDay,
+            httpOnly: false,
+            secure: true,
+            sameSite: "none"
+        });
+        // cookies().set(title,id , { expires: Date.now() + oneDay });
+       // cookies().set(id,size , { expires: Date.now() + oneDay });
         return NextResponse.json({
             success: true,
             message: "Logged in successfully"
