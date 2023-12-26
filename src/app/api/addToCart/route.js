@@ -14,6 +14,7 @@ export async function POST(req){
             value: id,
             expires: Date.now() + oneDay,
             httpOnly: false,
+            path: "/",
             secure: true,
             sameSite: "none"
         });
@@ -22,6 +23,7 @@ export async function POST(req){
             value: size,
             expires: Date.now() + oneDay,
             httpOnly: false,
+            path: "/",
             secure: true,
             sameSite: "none"
         });
