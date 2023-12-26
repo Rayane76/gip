@@ -21,6 +21,7 @@ export default function Cart(){
         const result = await axios.get("/api/cartItems");
         setArticles(result.data.data);
         setPrice(result.data.price);
+        console.log(result.data.data);
         
     };
 
@@ -34,7 +35,14 @@ export default function Cart(){
 
     return (
         <>
-        {
+        {articles === null ? "" :
+        articles.map((article)=>{
+          return(
+          <h1>{article}</h1>
+          )
+        })
+        }
+        {/* {
           articles === null ? "" :
         articles.length === 0 ? 
         <>
@@ -90,7 +98,7 @@ export default function Cart(){
          </div>  
          <Footer />
            </>
-        }
+        } */}
         </>
       )
 }
