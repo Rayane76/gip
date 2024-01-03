@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ['latin'] })
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
   title: 'Gip',
