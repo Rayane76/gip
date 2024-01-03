@@ -1,5 +1,7 @@
 'use client'
 
+export const dynamic = "force-dynamic";
+
 import CartItem from "../cartItem"
 import Navbar from "../navbar";
 import "../../styles/checkout.css"
