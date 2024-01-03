@@ -17,7 +17,7 @@ export async function GET(req){
 
         // console.log(req.headers.cookies);
         //THE PROBLEM IS IN THIS SPECIFIC LINE OF CODE , IT WORKS LOCALLY BUT AFTER DEPLOYMENT IT THROWS AN ERROR
-        const cookieStore = cookies()
+        const cookieStore = cookies();
     //     // ----- //
     //    await Promise.all(
     //     cookieStore.getAll().map(async (cookie) => {
