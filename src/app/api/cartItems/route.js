@@ -14,15 +14,9 @@ export async function GET(req){
         let found = 0;
         let price = 0;
         await connectToDB();
-        //const cookies = middleware();
-
-        // console.log(req.headers.cookies);
-        //THE PROBLEM IS IN THIS SPECIFIC LINE OF CODE , IT WORKS LOCALLY BUT AFTER DEPLOYMENT IT THROWS AN ERROR
         const cookieStore = cookies();
-    //     // ----- //
        await Promise.all(
         cookieStore.getAll().map(async (cookie) => {
-         // console.log(cookie);
             if(cookie.name.length === 24){
                sizes.push({size:cookie.value,id: cookie.name})
             }
@@ -68,7 +62,6 @@ export async function GET(req){
     } catch (error) {
         console.log(error)
         return NextResponse.json({
-            data: [error],
             success: false,
             message: "something wrong occured"
         });

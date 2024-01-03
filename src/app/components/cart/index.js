@@ -38,16 +38,6 @@ export default function Cart(){
 
     return (
         <>
-        {/* {articles === null ? "" :
-        articles.map((article)=>{
-          return(
-            <div>
-          <h1>{article.name}</h1>
-          <p>{article.message}</p>
-          </div>
-          )
-        })
-        } */}
         {
           articles === null ? "" :
         articles.length === 0 ? 
