@@ -38,7 +38,10 @@ export default function Cart(){
         {articles === null ? "" :
         articles.map((article)=>{
           return(
-          <h1>{article}</h1>
+            <div>
+          <h1>{article.name}</h1>
+          <p>{article.message}</p>
+          </div>
           )
         })
         }
