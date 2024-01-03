@@ -1,6 +1,7 @@
 'use client'
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 import CartItem from "../cartItem"
 import Navbar from "../navbar";
@@ -37,7 +38,7 @@ export default function Cart(){
 
     return (
         <>
-        {articles === null ? "" :
+        {/* {articles === null ? "" :
         articles.map((article)=>{
           return(
             <div>
@@ -46,8 +47,8 @@ export default function Cart(){
           </div>
           )
         })
-        }
-        {/* {
+        } */}
+        {
           articles === null ? "" :
         articles.length === 0 ? 
         <>
@@ -103,7 +104,7 @@ export default function Cart(){
          </div>  
          <Footer />
            </>
-        } */}
+        }
         </>
       )
 }
