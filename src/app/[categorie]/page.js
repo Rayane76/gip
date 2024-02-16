@@ -1,39 +1,44 @@
-'use client'
-
+import connectToDB from "../database";
+import { NextResponse } from "next/server";
+import Categorie from "../models/catgorie";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Navbar from "../components/navbar";
 import Article from "../components/article";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams, useRouter } from "next/navigation";
 
-export default function CatArticles(){
-  const params = useParams();
-  const categorie = params.categorie;
-  const url = "/api/getAllCategoriesArticles/" + categorie;
 
-   const [articles,setArticles] = useState(null);
 
-   const getArticles = async ()=>{
-    const result = await axios.get("/api/getAllCategoriesArticles/" + categorie,
-    {
-        params: {
-            cat: categorie,
-        }
-    });
-    setArticles(result.data.data);
-   }
+async function getArticles(props){
+    try {
 
-   useEffect(()=>{
-    getArticles();
-   },[]);
+        await connectToDB();
 
+        const result = await Categorie.findOne({title: props});
+
+        return result.articles;
+        
+       
+      } catch (e) {
+        console.log(e);
+    
+        return NextResponse.json({
+          success: false,
+          message: "Something went wrong!",
+        });
+      }
+    
+
+
+}
+
+
+export default async function CatArticles({ params }){
+
+  const articles = await getArticles(params.categorie);
 
    return(
     <>
-        {articles === null ? "" :
         <>
         <Navbar />
         <div className="d-none d-md-block" style={{marginTop:"40px",height:"auto"}}>
@@ -59,7 +64,6 @@ export default function CatArticles(){
         }
         </div>
         </>
-        }
     </>
    )
 }
