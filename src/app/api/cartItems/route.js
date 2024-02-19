@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { cookies } from 'next/headers'
 import Categorie from "../../models/catgorie"
 import connectToDB from "../../database";
-import middleware from "../../../middleware";
 export const dynamic = "force-dynamic";
 
 

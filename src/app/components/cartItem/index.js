@@ -1,15 +1,19 @@
 'use client'
+import { useRouter } from 'next/navigation';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
 
 export default function CartItem(props){
 
+  const router = useRouter();
+
   const handleClick = async () =>{
     const result = axios.post("/api/deleteFromCart",{
       name: props.title,
     }).then(function (response) {
       console.log(response.data.success);
+      router.refresh();
     })
     .catch(function (error) {
       console.log(error);

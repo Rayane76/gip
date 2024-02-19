@@ -1,7 +1,6 @@
 'use client'
 
 import { useState,useEffect} from 'react'
-import Navbar from '../navbar';
 import Container from 'react-bootstrap/Container';
 import "../../styles/specificarticle.css"
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -21,7 +20,6 @@ import 'swiper/css/pagination';
 
 import { FreeMode, Navigation, Thumbs, Pagination } from 'swiper/modules';
 import axios from 'axios';
-import { ContentPasteOffSharp } from '@mui/icons-material';
 
 
 export default function SpecificArticle(props){
@@ -45,15 +43,15 @@ export default function SpecificArticle(props){
   const url = "https://res.cloudinary.com/dsyvhttva/image/upload/v1703432812/gip/";
 
   const addToCart = async () =>{
-    if(props.article.sizeInStock.existing === true || props.article.pointureInStock.existing === true){
+    if(props.sizeInStock.existing === true || props.pointureInStock.existing === true){
       if(size === ""){
         setMessage("Please select a size !")
       }
       else{
         setMessage("Successfully added to cart !")
         const result = await axios.post("/api/addToCart",{
-          title: props.article.title,
-          id: props.article._id,
+          title: props.title,
+          id: props.id,
           size: size,
       })
       .then(function (response) {
@@ -67,8 +65,8 @@ export default function SpecificArticle(props){
     else{
     setMessage("Successfully added to cart !")
     const result = await axios.post("/api/addToCart",{
-      title: props.article.title,
-      id: props.article._id,
+      title: props.title,
+      id: props.id,
       size: size,
   })
   .then(function (response) {
@@ -92,9 +90,9 @@ export default function SpecificArticle(props){
         modules={[Pagination]} >
          
          <SwiperSlide style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-        <img src={url + props.article.mainImage} alt='product' style={{width:"400px"}}></img>
+        <img src={url + props.mainImage} alt='product' style={{width:"400px"}}></img>
         </SwiperSlide>
-        {props.article.images.map((image)=>{
+        {props.images.map((image)=>{
           return(
             <SwiperSlide style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
         <img src={url + image} alt='product' style={{width:"400px"}}></img>
@@ -106,37 +104,37 @@ export default function SpecificArticle(props){
     <p style={{textAlign:"center",marginTop:"20px"}}>{props.title}</p>
     <p style={{textAlign:"center",marginTop:"10px"}}>{props.price}</p>
    
-    {props.article.sizeInStock.existing === false ? ""
+    {props.sizeInStock.existing === false ? ""
     :
     <>
     <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
       <Form.Select value={size} onChange={onSizeSelect}>
        Select Size   
-       {props.article.sizeInStock.num.s > 0 && <option value="s">S</option>}
-       {props.article.sizeInStock.num.m > 0 && <option value="m">M</option>}
-       {props.article.sizeInStock.num.l > 0 && <option value="l">L</option>}
-       {props.article.sizeInStock.num.xl > 0 && <option value="xl">XL</option>}
-       {props.article.sizeInStock.num.xxl > 0 && <option value="xxl">XXL</option>}
+       {props.sizeInStock.num.s > 0 && <option value="s">S</option>}
+       {props.sizeInStock.num.m > 0 && <option value="m">M</option>}
+       {props.sizeInStock.num.l > 0 && <option value="l">L</option>}
+       {props.sizeInStock.num.xl > 0 && <option value="xl">XL</option>}
+       {props.sizeInStock.num.xxl > 0 && <option value="xxl">XXL</option>}
       </Form.Select>
     </>
     }
-    {props.article.pointureInStock.existing === false ? ""
+    {props.pointureInStock.existing === false ? ""
     :
     <>
     <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
       <Form.Select value={size} onChange={onSizeSelect}>
        Select Size   
-       {props.article.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
-       {props.article.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
-       {props.article.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
-       {props.article.pointureInStock.num.point38 > 0 && <option value="38">38</option>}
-       {props.article.pointureInStock.num.point39 > 0 && <option value="39">39</option>}
-       {props.article.pointureInStock.num.point40 > 0 && <option value="40">40</option>}
-       {props.article.pointureInStock.num.point41 > 0 && <option value="41">41</option>}
-       {props.article.pointureInStock.num.point42 > 0 && <option value="42">42</option>}
-       {props.article.pointureInStock.num.point43 > 0 && <option value="43">43</option>}
-       {props.article.pointureInStock.num.point44 > 0 && <option value="44">44</option>}
-       {props.article.pointureInStock.num.point45 > 0 && <option value="45">45</option>}
+       {props.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
+       {props.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
+       {props.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
+       {props.pointureInStock.num.point38 > 0 && <option value="38">38</option>}
+       {props.pointureInStock.num.point39 > 0 && <option value="39">39</option>}
+       {props.pointureInStock.num.point40 > 0 && <option value="40">40</option>}
+       {props.pointureInStock.num.point41 > 0 && <option value="41">41</option>}
+       {props.pointureInStock.num.point42 > 0 && <option value="42">42</option>}
+       {props.pointureInStock.num.point43 > 0 && <option value="43">43</option>}
+       {props.pointureInStock.num.point44 > 0 && <option value="44">44</option>}
+       {props.pointureInStock.num.point45 > 0 && <option value="45">45</option>}
       </Form.Select>
     </>
     }
@@ -172,9 +170,9 @@ export default function SpecificArticle(props){
         className="mySwiper2"
       >
        <SwiperSlide>
-          <img src={url + props.article.mainImage} alt='phot' />
+          <img src={url + props.mainImage} alt='phot' />
         </SwiperSlide>
-      {props.article.images.map((image)=>{
+      {props.images.map((image)=>{
         return(
           <SwiperSlide>
           <img src={url + image} alt='phot' />
@@ -193,9 +191,9 @@ export default function SpecificArticle(props){
         className="mySwiper"
       >
        <SwiperSlide>
-          <img src={url + props.article.mainImage} alt='phot' />
+          <img src={url + props.mainImage} alt='phot' />
         </SwiperSlide>
-      {props.article.images.map((image)=>{
+      {props.images.map((image)=>{
         return(
           <SwiperSlide>
           <img src={url + image} alt='phot' />
@@ -205,41 +203,41 @@ export default function SpecificArticle(props){
       </Swiper>
       </Container>
       <Container>
-        <h1>{props.article.title}</h1>
-        <h3>{props.article.price}</h3>
+        <h1>{props.title}</h1>
+        <h3>{props.price}</h3>
         <form>
           <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
           <div className='d-flex justify-content-start'>
-      {props.article.sizeInStock.existing === false ? ""
+      {props.sizeInStock.existing === false ? ""
     :
     <>
       <Form.Select value={size} onChange={onSizeSelect}>
        Select Size   
-       {props.article.sizeInStock.num.s > 0 && <option value="s">S</option>}
-       {props.article.sizeInStock.num.m > 0 && <option value="m">M</option>}
-       {props.article.sizeInStock.num.l > 0 && <option value="l">L</option>}
-       {props.article.sizeInStock.num.xl > 0 && <option value="xl">XL</option>}
-       {props.article.sizeInStock.num.xxl > 0 && <option value="xxl">XXL</option>}
+       {props.sizeInStock.num.s > 0 && <option value="s">S</option>}
+       {props.sizeInStock.num.m > 0 && <option value="m">M</option>}
+       {props.sizeInStock.num.l > 0 && <option value="l">L</option>}
+       {props.sizeInStock.num.xl > 0 && <option value="xl">XL</option>}
+       {props.sizeInStock.num.xxl > 0 && <option value="xxl">XXL</option>}
       </Form.Select>
     </>
     }
 
-    {props.article.pointureInStock.existing === false ? ""
+    {props.pointureInStock.existing === false ? ""
     :
     <>
       <Form.Select value={size} onChange={onSizeSelect}>
        Select Size   
-       {props.article.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
-       {props.article.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
-       {props.article.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
-       {props.article.pointureInStock.num.point38 > 0 && <option value="38">38</option>}
-       {props.article.pointureInStock.num.point39 > 0 && <option value="39">39</option>}
-       {props.article.pointureInStock.num.point40 > 0 && <option value="40">40</option>}
-       {props.article.pointureInStock.num.point41 > 0 && <option value="41">41</option>}
-       {props.article.pointureInStock.num.point42 > 0 && <option value="42">42</option>}
-       {props.article.pointureInStock.num.point43 > 0 && <option value="43">43</option>}
-       {props.article.pointureInStock.num.point44 > 0 && <option value="44">44</option>}
-       {props.article.pointureInStock.num.point45 > 0 && <option value="45">45</option>}
+       {props.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
+       {props.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
+       {props.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
+       {props.pointureInStock.num.point38 > 0 && <option value="38">38</option>}
+       {props.pointureInStock.num.point39 > 0 && <option value="39">39</option>}
+       {props.pointureInStock.num.point40 > 0 && <option value="40">40</option>}
+       {props.pointureInStock.num.point41 > 0 && <option value="41">41</option>}
+       {props.pointureInStock.num.point42 > 0 && <option value="42">42</option>}
+       {props.pointureInStock.num.point43 > 0 && <option value="43">43</option>}
+       {props.pointureInStock.num.point44 > 0 && <option value="44">44</option>}
+       {props.pointureInStock.num.point45 > 0 && <option value="45">45</option>}
       </Form.Select>
     </>
     }

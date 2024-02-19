@@ -1,4 +1,3 @@
-'use client'
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -9,38 +8,28 @@ import "../../styles/checkout.css"
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { useEffect, useState } from "react";
-import axios from "axios";
 import Footer from "../Footer";
 
-export default function Cart(){
-    
-    const [articles,setArticles] = useState(null);
-    const [price,setPrice] = useState(0);
-    const [sizes,setSizes] = useState(null);
+
+async function getCartItems(){
+  const res = await import("../../api/cartItems/route");
+
+  return await (await res.GET()).json()
+
+}
 
 
-    const getArticles = async () =>{
-        const result = await axios.get("/api/cartItems");
-        setArticles(result.data.data);
-        setPrice(result.data.price);
-        console.log(result.data.data);
-        
-    };
+export default async function Cart(){
 
-    useEffect(()=>{
-      getArticles();
-    },[]);
+   const articles = await getCartItems();
 
-
-
+   console.log(articles);
 
 
     return (
         <>
-        {
-          articles === null ? "" :
-        articles.length === 0 ? 
+       {
+        articles.data.length === 0 ? 
         <>
           <Navbar />
           <div style={{display:"flex",justifyContent:"center",marginTop:"150px",height:"50vh"}}>
@@ -63,8 +52,8 @@ export default function Cart(){
             </tr>
           </thead>
           <tbody>
-          {articles === null || articles.length === 0 ? "" :
-          articles.map((item)=>{
+          {
+          articles.data.map((item)=>{
             return(
             <CartItem size={item.size} image={item.article.mainImage} title={item.article.title} price={item.article.price} id={item.article._id} />
             )
@@ -80,7 +69,7 @@ export default function Cart(){
             <hr></hr>
             <div style={{display:"flex"}}>
             <p style={{marginRight:"auto"}}>Sous Total</p>
-            <p>{price}</p>
+            <p>{articles.price}</p>
             </div>
             <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
             <a href='/checkout'>
