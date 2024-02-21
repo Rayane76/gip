@@ -7,6 +7,9 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import "../../styles/checkout.css"
 import { useState } from 'react';
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 
 export default function CheckoutComponent(props){
 

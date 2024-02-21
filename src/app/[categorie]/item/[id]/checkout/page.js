@@ -3,8 +3,9 @@ import CheckoutComponent from "../../../../components/checkout"
 import Categorie from "../../../../models/catgorie"
 import connectToDB from "../../../../database"
 import { NextResponse } from "next/server";
-export const dynamic = "force-dynamic";
 import { cookies } from 'next/headers'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 
 async function getArticle(categorie,id){
