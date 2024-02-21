@@ -13,22 +13,14 @@ export async function POST(req){
             name: title,
             value: id,
             expires: Date.now() + oneDay,
-            httpOnly: false,
-            path: "/",
             secure: true,
-            sameSite: "none"
         });
         cookies().set({
             name: id,
             value: size,
             expires: Date.now() + oneDay,
-            httpOnly: false,
-            path: "/",
             secure: true,
-            sameSite: "none"
         });
-        // cookies().set(title,id , { expires: Date.now() + oneDay });
-       // cookies().set(id,size , { expires: Date.now() + oneDay });
         return NextResponse.json({
             success: true,
             message: "Logged in successfully"

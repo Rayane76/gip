@@ -1,17 +1,26 @@
 'use client'
 
 
-import Navbar from '../components/navbar';
+import Navbar from '../navbar';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import "../styles/checkout.css"
+import "../../styles/checkout.css"
+import { useState } from 'react';
+
+export default function CheckoutComponent(props){
+
+   const data = useState({prenom:"",nom:"",wilaya:"",commune:"",tel:"",email:""});
 
 
-export default function Checkout(){
-    return (
+   const submitPurchase = async ()=>{
+
+   }
+
+
+    return(
         <>
-        <Navbar />
+             <Navbar />
         <div className="main" style={{marginTop:"40px"}}>
         <div style={{marginRight:"100px"}}>
         <h2 style={{marginLeft:"100px"}}>Order Details</h2>
@@ -105,16 +114,16 @@ export default function Checkout(){
             </div>
             <hr style={{marginTop:"0"}}></hr>
             <div style={{display:"flex"}}>
-            <p style={{marginRight:"auto"}}>SweathShirt Gray New</p>
-            <p style={{marginLeft:"auto"}}><strong>$100</strong></p>
+            <p style={{marginRight:"auto"}}>{props.title}</p>
+            <p style={{marginLeft:"auto"}}><strong>{props.price}</strong></p>
             </div>
             <hr style={{marginTop:"0"}}></hr>
             <div style={{display:"flex"}}>
             <p style={{marginRight:"auto"}}>Total</p>
-            <p><strong>$100</strong></p>
+            <p><strong>{props.price}</strong></p>
             </div>
             <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-            <Button variant="primary">Commander</Button>
+            <Button onClick={submitPurchase} variant="primary">Commander</Button>
             </div>
             
           </Card.Body>
@@ -122,6 +131,5 @@ export default function Checkout(){
         </div>
         </div>
         </>
-      )
-
+    )
 }

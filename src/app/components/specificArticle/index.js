@@ -25,16 +25,10 @@ import axios from 'axios';
 export default function SpecificArticle(props){
 
 
-  const [article,setArticle] = useState(null); 
-
   const [message,setMessage] = useState(null);
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  const [color,setColor] = useState("");
-  const onColorSelect = (e)=>{
-    setColor(e.target.value);
-  }
   const [size,setSize] = useState("");
   const onSizeSelect = (e)=>{
     setSize(e.target.value);
@@ -246,7 +240,7 @@ export default function SpecificArticle(props){
             <Button onClick={addToCart} variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
              Add to Cart
             </Button>
-            <a href='/checkout' style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px"}}>
+            <a href={'/' + props.categorie + '/item/' + props.id + '/checkout'} style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px"}}>
              <Button variant="dark" size="lg" style={{borderRadius:"0",borderWidth:"2px",width:"-webkit-fill-available"}}>
               Buy Now
              </Button>

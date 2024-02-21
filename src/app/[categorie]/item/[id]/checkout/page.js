@@ -1,9 +1,8 @@
-import Navbar from "../../../components/navbar";
-import SpecificArticle from "../../../components/specificArticle";
-import connectToDB from "../../../database";
-import { NextResponse } from "next/server";
-import Categorie from "../../../models/catgorie";
 
+import CheckoutComponent from "../../../../components/checkout"
+import Categorie from "../../../../models/catgorie"
+import connectToDB from "../../../../database"
+import { NextResponse } from "next/server";
 
 
 async function getArticle(categorie,id){
@@ -32,17 +31,17 @@ async function getArticle(categorie,id){
 }
 
 
-export default async function Art({ params }){
+export default async function Checkout({ params }){
 
     const categorie = params.categorie;
     const id = params.id;
 
     const article = await getArticle(categorie,id);
 
-    return(
-        <>   
-            <Navbar />
-            <SpecificArticle categorie={categorie} stock={article.stock} sizeInStock={article.sizeInStock} pointureInStock={article.pointureInStock} title={article.title} price={article.price}  mainImage={article.mainImage} images={article.images} id={article._id} />
+    return (
+        <>
+        <CheckoutComponent categorie={categorie} stock={article.stock} sizeInStock={article.sizeInStock} pointureInStock={article.pointureInStock} title={article.title} price={article.price}  mainImage={article.mainImage} images={article.images} id={article._id} />
         </>
-    )
+      )
+
 }
