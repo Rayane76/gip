@@ -3,6 +3,8 @@ import CheckoutComponent from "../../../../components/checkout"
 import Categorie from "../../../../models/catgorie"
 import connectToDB from "../../../../database"
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
+import { cookies } from 'next/headers'
 
 
 async function getArticle(categorie,id){
@@ -33,6 +35,16 @@ async function getArticle(categorie,id){
 
 export default async function Checkout({ params }){
 
+    const cookieStore = cookies()
+
+    const has = cookieStore.has("purchasedItem")
+
+    console.log(has);
+  const size = cookieStore.get('purchasedItem')
+
+
+  
+
     const categorie = params.categorie;
     const id = params.id;
 
@@ -40,7 +52,7 @@ export default async function Checkout({ params }){
 
     return (
         <>
-        <CheckoutComponent categorie={categorie} stock={article.stock} sizeInStock={article.sizeInStock} pointureInStock={article.pointureInStock} title={article.title} price={article.price}  mainImage={article.mainImage} images={article.images} id={article._id} />
+        <CheckoutComponent sizeChose={size.size} categorie={categorie} stock={article.stock} sizeInStock={article.sizeInStock} pointureInStock={article.pointureInStock} title={article.title} price={article.price}  mainImage={article.mainImage} images={article.images} id={article._id} />
         </>
       )
 

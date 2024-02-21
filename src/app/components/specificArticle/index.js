@@ -6,6 +6,7 @@ import "../../styles/specificarticle.css"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 
 
@@ -22,8 +23,10 @@ import { FreeMode, Navigation, Thumbs, Pagination } from 'swiper/modules';
 import axios from 'axios';
 
 
+
 export default function SpecificArticle(props){
 
+  const [modalShow, setModalShow] = useState(false);
 
   const [message,setMessage] = useState(null);
 
@@ -36,16 +39,14 @@ export default function SpecificArticle(props){
 
   const url = "https://res.cloudinary.com/dsyvhttva/image/upload/v1703432812/gip/";
 
-  const addToCart = async () =>{
+
+  const addToBuy = async () =>{
     if(props.sizeInStock.existing === true || props.pointureInStock.existing === true){
       if(size === ""){
         setMessage("Please select a size !")
       }
       else{
-        setMessage("Successfully added to cart !")
-        const result = await axios.post("/api/addToCart",{
-          title: props.title,
-          id: props.id,
+        const result = await axios.post("/api/addToPurchase",{
           size: size,
       })
       .then(function (response) {
@@ -56,20 +57,51 @@ export default function SpecificArticle(props){
         });
       }
     }
-    else{
-    setMessage("Successfully added to cart !")
-    const result = await axios.post("/api/addToCart",{
-      title: props.title,
-      id: props.id,
-      size: size,
-  })
-  .then(function (response) {
-      console.log(response.data.success);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
   }
+
+  const addToCart = async () =>{
+    // if(props.sizeInStock.existing === true || props.pointureInStock.existing === true){
+
+        setMessage("Successfully added to cart !")
+        const result = await axios.post("/api/addToCart",{
+          title: props.title,
+          id: props.id,
+          size: size,
+      })
+      .then(function (response) {
+          console.log(response.data.success);
+          setModalShow(false);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      
+    }
+
+
+
+  function MyVerticallyCenteredModal() {
+    return (
+      <Modal
+        show={modalShow}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add item to cart
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+         {(props.sizeInStock.existing === true || props.pointureInStock.existing === true) && (size === "" || size === "Select size") && <h4>Please select a size !</h4>}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={()=>setModalShow(false)}>Close</Button>
+          {(((props.sizeInStock.existing === true || props.pointureInStock.existing === true) && (size != "" && size != "Select size")) || (props.sizeInStock.existing === false && props.pointureInStock.existing === false)) && <Button onClick={addToCart}>Confirm</Button>}
+        </Modal.Footer>
+      </Modal>
+    );
   }
 
   return (
@@ -103,7 +135,7 @@ export default function SpecificArticle(props){
     <>
     <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
       <Form.Select value={size} onChange={onSizeSelect}>
-       Select Size   
+       <option>Select size</option>   
        {props.sizeInStock.num.s > 0 && <option value="s">S</option>}
        {props.sizeInStock.num.m > 0 && <option value="m">M</option>}
        {props.sizeInStock.num.l > 0 && <option value="l">L</option>}
@@ -117,7 +149,7 @@ export default function SpecificArticle(props){
     <>
     <p style={{marginLeft:"20px",marginTop:"20px"}}>Size</p>
       <Form.Select value={size} onChange={onSizeSelect}>
-       Select Size   
+      <option>Select size</option>   
        {props.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
        {props.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
        {props.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
@@ -133,11 +165,15 @@ export default function SpecificArticle(props){
     </>
     }
     <div className="d-grid gap-2" style={{marginTop:"20px"}}>
-      <Button onClick={addToCart} variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
+      <Button onClick={() => setModalShow(true)} variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
         Add to Cart
       </Button>
-      <a href='/checkout' style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px"}}>
-      <Button variant="dark" size="lg" style={{borderRadius:"0",borderWidth:"2px",width:"-webkit-fill-available"}}>
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+      <a href={'/' + props.categorie + '/item/' + props.id + '/checkout'} style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px"}}>
+      <Button onClick={addToBuy} variant="dark" size="lg" style={{borderRadius:"0",borderWidth:"2px",width:"-webkit-fill-available"}}>
         Buy Now
       </Button>
       </a>
@@ -206,7 +242,7 @@ export default function SpecificArticle(props){
     :
     <>
       <Form.Select value={size} onChange={onSizeSelect}>
-       Select Size   
+       <option>Select size</option>   
        {props.sizeInStock.num.s > 0 && <option value="s">S</option>}
        {props.sizeInStock.num.m > 0 && <option value="m">M</option>}
        {props.sizeInStock.num.l > 0 && <option value="l">L</option>}
@@ -220,7 +256,7 @@ export default function SpecificArticle(props){
     :
     <>
       <Form.Select value={size} onChange={onSizeSelect}>
-       Select Size   
+      <option>Select size</option>    
        {props.pointureInStock.num.point35 > 0 && <option value="35">35</option>}
        {props.pointureInStock.num.point36 > 0 && <option value="36">36</option>}
        {props.pointureInStock.num.point37 > 0 && <option value="37">37</option>}
@@ -237,9 +273,11 @@ export default function SpecificArticle(props){
     }
           </div>
           <div className="d-grid gap-2" style={{marginTop:"20px"}}>
-            <Button onClick={addToCart} variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
+            <Button onClick={() => setModalShow(true)} variant="light" size="lg" style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px",borderRadius:"0",borderWidth:"2px"}}>
              Add to Cart
             </Button>
+            <MyVerticallyCenteredModal
+      />
             <a href={'/' + props.categorie + '/item/' + props.id + '/checkout'} style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px"}}>
              <Button variant="dark" size="lg" style={{borderRadius:"0",borderWidth:"2px",width:"-webkit-fill-available"}}>
               Buy Now

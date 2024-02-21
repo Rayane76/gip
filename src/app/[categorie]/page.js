@@ -39,7 +39,6 @@ export default async function CatArticles({ params }){
 
    return(
     <>
-        <>
         <Navbar />
         <div className="d-none d-md-block" style={{marginTop:"40px",height:"auto"}}>
         <Container>
@@ -63,7 +62,6 @@ export default async function CatArticles({ params }){
         })
         }
         </div>
-        </>
     </>
    )
 }
