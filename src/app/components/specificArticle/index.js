@@ -21,10 +21,14 @@ import 'swiper/css/pagination';
 
 import { FreeMode, Navigation, Thumbs, Pagination } from 'swiper/modules';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 
+// href={'/' + props.categorie + '/item/' + props.id + '/checkout'}
 
 export default function SpecificArticle(props){
+
+  const router = useRouter();
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -42,14 +46,16 @@ export default function SpecificArticle(props){
 
   const addToBuy = async () =>{
     if(props.sizeInStock.existing === true || props.pointureInStock.existing === true){
-      if(size === ""){
+      if(size === "" || size === "Select size"){
         setMessage("Please select a size !")
+        return
       }
       else{
         const result = await axios.post("/api/addToPurchase",{
           size: size,
       })
       .then(function (response) {
+        router.push('/' + props.categorie + '/item/' + props.id + '/checkout');
           console.log(response.data.success);
         })
         .catch(function (error) {
@@ -77,8 +83,6 @@ export default function SpecificArticle(props){
         });
       
     }
-
-
 
   function MyVerticallyCenteredModal() {
     return (
@@ -169,14 +173,10 @@ export default function SpecificArticle(props){
         Add to Cart
       </Button>
       <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
       />
-      <a href={'/' + props.categorie + '/item/' + props.id + '/checkout'} style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px"}}>
-      <Button onClick={addToBuy} variant="dark" size="lg" style={{borderRadius:"0",borderWidth:"2px",width:"-webkit-fill-available"}}>
+      <Button onClick={addToBuy} variant="dark" size="lg" style={{borderRadius:"0",borderWidth:"2px",width:"-webkit-fill-available",margin:"10px"}}>
         Buy Now
       </Button>
-      </a>
     </div>
     <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"15px"}}>
     <p>{message}</p>
@@ -278,11 +278,10 @@ export default function SpecificArticle(props){
             </Button>
             <MyVerticallyCenteredModal
       />
-            <a href={'/' + props.categorie + '/item/' + props.id + '/checkout'} style={{marginLeft:"10px",marginRight:"10px",marginBottom:"10px"}}>
-             <Button variant="dark" size="lg" style={{borderRadius:"0",borderWidth:"2px",width:"-webkit-fill-available"}}>
+             <Button onClick={addToBuy} variant="dark" size="lg" style={{borderRadius:"0",borderWidth:"2px",width:"-webkit-fill-available",margin:"10px"}}>
               Buy Now
              </Button>
-            </a>
+
           </div>
         </form>
         <p style={{marginTop:"30px"}}>{message}</p>

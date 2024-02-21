@@ -1,11 +1,13 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 
 import CheckoutComponent from "../../../../components/checkout"
 import Categorie from "../../../../models/catgorie"
 import connectToDB from "../../../../database"
 import { NextResponse } from "next/server";
 import { cookies } from 'next/headers'
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+
 
 
 async function getArticle(categorie,id){
@@ -38,10 +40,8 @@ export default async function Checkout({ params }){
 
     const cookieStore = cookies()
 
-    const has = cookieStore.has("purchasedItem")
-
-    console.log(has);
-  const size = cookieStore.get('purchasedItem')
+    const size = cookieStore.get('purchasedItem')
+    
 
 
   
